@@ -1,4 +1,3 @@
-
 // hangman picturing is yet to be done
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,11 +10,11 @@ import java.util.Scanner;
 import java.util.Arrays;
 import java.lang.Character;
 
-public class MyHangmanGame {
+public class HangmanGame {
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-
+//yes
 		// ***********dictionary is loaded here*******************
 		System.out.println();
 		System.out
