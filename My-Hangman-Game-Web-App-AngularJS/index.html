@@ -5,32 +5,64 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js">
 	</script>
 	<script src="app.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 <body ng-app="HangmanApp" ng-controller="GameController">
-	
-	<div>
-		<div>Guesses left:: {{guesses}}</div>
+	<p class="title">HANGMAN
+	</p>
 
-		<div>Incorrect Guesses:: <span ng-repeat=" letter in incorrectLettersChosen">{{letter}}
-		</span>
 
-		<div>Correct Guesses:: <span ng-repeat=" letter in correctLettersChosen">{{letter}}
-		</span>
-
-	</div>
-
+<div class ="guess">Chances left::{{guesses}}</div>
 
 
 	<div>
-		You have to guess :{{displayWord}}
-	</div>
-	<div>
-		<div>
-			<input type="text" name="guess" ng-model="input.letter">
+		<div class="incorrectLetter">
+			<i class="incorrect-icon material-icons" style="font-size:60px;color:#E91E63;">thumb_down</i>
+			<span class="incorrect" 
+			style="top:40px"
+			ng-repeat="letter in incorrectLettersChosen"><del>{{letter}}</del></span>
 
-			<button ng-click="letterChosen()">SUBMIT</button>
+		</div>
+		<div class="correctLetter">
+			<i class="correct-icon material-icons" style="font-size:60px;color:#009688;">thumb_up</i>
+			
+			<span class="correct" 
+			style=""
+			ng-repeat="letter in correctLettersChosen">{{letter}}</span>
+			
 		</div>
 	</div>
+	<!-- multiline "comment" below using script type="text/html" -->
+<!-- multiline "comment" below using script type="text/html" 
+	<div>Incorrect Guesses:: <span ng-repeat=" letter in incorrectLettersChosen">{{letter}}
+	</span>
+
+	<div>Correct Guesses:: <span ng-repeat=" letter in correctLettersChosen">{{letter}}
+	</span>
+
 </div>
+-->
+<div class="word">{{displayWord}}</div>
+<div class="input">
+<input type="text" name="guess" ng-model="input.letter" ng-minlength="1" ng-maxlength="1" ng-pattern="/^[A-Za-z]+$/">
+</div>
+<button class="button" ng-click="letterChosen()">SUBMIT</button>
+<!--
+<div>
+	You have to guess :{{displayWord}}
+</div>
+<div>
+	<div>
+		<input type="text" name="guess" ng-model="input.letter">
+
+		<button ng-click="letterChosen()">SUBMIT</button>
+	</div>
+</div>
+</div>
+ -->
+
 </body>
 </html>

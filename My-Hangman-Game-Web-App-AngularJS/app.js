@@ -1,15 +1,12 @@
 var app=angular.module("HangmanApp",[]);
 app.controller("GameController",['$scope','$timeout',function($scope,$timeout){
-var words=["rat","cat","bat","mat"];
-$scope.incorrectLettersChosen=[];
-$scope.correctLettersChosen=[];
-$scope.guesses=6;
-$scope.displayWord='';
+var words=["california", "alaska","arizona","colorado","connecticut","delaware", "newyork","arizona","florida","illinois","massachusetts","nevada","texas","virginia"];
+
 $scope.input={
 	letter : ''
 }
 var selectRandomWord=function(){
-	var index= Math.round(Math.random()*words.length);
+	var index= Math.round(Math.random()*(words.length-1));
 	return words[index];
 
 }
@@ -17,7 +14,7 @@ var selectRandomWord=function(){
 var newGame = function(){
 	$scope.incorrectLettersChosen=[];
 	$scope.correctLettersChosen=[];
-	$scope.guesses=6;
+	$scope.guesses=10;
     $scope.displayWord='';
 
     selectedWord=selectRandomWord();
