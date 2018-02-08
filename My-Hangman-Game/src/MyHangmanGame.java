@@ -10,23 +10,47 @@ import java.util.Scanner;
 import java.util.Arrays;
 import java.lang.Character;
 
-public class HangmanGame {
+public class MyHangmanGame {
+	static String easyWord;
+	static String mediumWord;
+	static String randomWord;
+	static String stateName;
+	static String word;
+	public static Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
-//yes
-		// ***********dictionary is loaded here*******************
-		System.out.println();
-		System.out
-				.println("Welcome to hangman Game! Lets see if you are a life saviour");
+
+		System.out.println("Welcome to hangman Game!");
+		System.out.println(" Lets see if you are a life saviour");
 		System.out.println();
 
+		String playAgain;
+		// ***********dictionary is loaded here*******************
+		do {
+			playAgain = "";
+			NewGame();
+			System.out.println();
+			System.out.println("world you like to play again? Enter Y or y");
+			playAgain = scan.nextLine();
+
+		} while (playAgain.equalsIgnoreCase("Y"));
+
+	}
+
+	public static void NewGame() {
+		WordsLoading();
+		TakeUserInput();
+		GameLogicCheck();
+
+	}
+
+	public static void WordsLoading() {
 		Random rand = new Random();
 		List<String> wordsList = new ArrayList<>();
 		List<String> stateList = new ArrayList<>();
 		List<String> easyList = new ArrayList<>();
 		List<String> mediumList = new ArrayList<>();
-		String[] data = null;
+
 		/*
 		 * File file = new File(
 		 * "C:/Users/gkneerukonda/Desktop/hangman game/words.txt");
@@ -69,26 +93,22 @@ public class HangmanGame {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		String stateName = stateList.get(rand.nextInt(stateList.size()));
+		stateName = stateList.get(rand.nextInt(stateList.size()));
 		String[] words = new String[wordsList.size()];
 		words = wordsList.toArray(words);
-		// *********all the words are in the string array named words
-
-		// ***********picking a random word***********
-		String randomWord;
 		for (int k = 0; k < words.length; k++) {
 			if (words[k].length() == 4) {
 				easyList.add(words[k]);
 			}
 		}
-		String easyWord = easyList.get(rand.nextInt(easyList.size()));
-		// ***********medium words
+		easyWord = easyList.get(rand.nextInt(easyList.size()));
+
 		for (int k = 0; k < words.length; k++) {
 			if (words[k].length() == 5) {
 				mediumList.add(words[k]);
 			}
 		}
-		String mediumWord = mediumList.get(rand.nextInt(mediumList.size()));
+		mediumWord = mediumList.get(rand.nextInt(mediumList.size()));
 		randomWord = words[(int) (Math.random() * words.length)];
 		// *for developer**************************
 		System.out.println("for developer    " + easyWord + "   easy word");
@@ -97,16 +117,18 @@ public class HangmanGame {
 		System.out
 				.println("for developer   " + stateName + "   USA State name");
 		System.out.println();
+	}
 
-		boolean retval = false;
-		Scanner scan = new Scanner(System.in);
+	public static void TakeUserInput() {
+		// Scanner scan = new Scanner(System.in);
 		System.out.println("choose your difficulty level");
 		System.out.println("1--> Easy");
 		System.out.println("2--> Medium");
 		System.out.println("3--> Random");
 		System.out.println("4--> USA State Names");
 		int choice = scan.nextInt();
-		String word = null;
+		scan.nextLine();
+		word = null;
 		if (choice == 1) {
 			word = easyWord;
 			// System.out.println(word);
@@ -121,11 +143,16 @@ public class HangmanGame {
 		if (choice == 4) {
 			word = stateName;
 		}
+		// scan.close();
 
+	}
+
+	public static void GameLogicCheck() {
+		// Scanner userInput = new Scanner(System.in);
+		boolean retval = false;
 		char[] wordA = word.toCharArray();
-
 		char[] answer = new char[wordA.length];
-		String letter;
+		String letter = "";
 
 		int chances = 10;
 		// * initialized word to be guessed to ********
@@ -137,7 +164,8 @@ public class HangmanGame {
 		while (chances > 0) {
 			System.out.println("    enter the letter" + "     " + "you have "
 					+ chances + " chances to save the life");
-			letter = scan.next();
+
+			letter = scan.nextLine();
 			letter.toLowerCase();
 			char guess = letter.charAt(0);
 			boolean check = false;
@@ -165,10 +193,10 @@ public class HangmanGame {
 			for (int j = 0; j < answer.length; j++) {
 				System.out.print(answer[j]);
 			}
-			// if guessed word is equal to to be guessed word ..you win and
-			// break
+			// if guessed word is equal to to be original word ..you win and
+
 			retval = Arrays.equals(wordA, answer);
-			// System.out.println("arr1 and arr2 equal: " + retval);
+
 			if (retval == true) {
 				System.out.println();
 				System.out.println("great! you just hit the bull's eye");
@@ -179,9 +207,9 @@ public class HangmanGame {
 
 		if (retval == false) {
 			System.out
-					.println("you couldnt guess it in given number of chances");
+					.println("you couldn't guess it in given number of chances");
 		}
-		scan.close();
+
 	}
 
 }
